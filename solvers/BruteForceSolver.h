@@ -4,7 +4,7 @@
 class BFSolver : public Solver
 {
 
-
+private:
     inline bool literalValue(Literal lit, uint64_t mask) const;
 
 public:
