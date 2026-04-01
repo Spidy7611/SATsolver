@@ -1,2 +1,4 @@
 #pragma once
-#include "BruteForceSolver.h"
+#include "BF/BruteForceSolver.h"
+#include "DPLL/DPLLSolver.h"
+// #include "CDCL/CDCLSolver.h" // Majd ha kész lesz
