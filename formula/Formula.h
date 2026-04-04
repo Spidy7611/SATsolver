@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-
+//dpll miatt vector nem tömb
 using Literal = int;
 using Clause = std::vector<Literal>;
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "Solver.h"
+#include "../Solver.h"
 #include <map>
 
 class DPLLSolver : public Solver
