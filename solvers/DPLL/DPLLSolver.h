@@ -9,15 +9,11 @@ public:
     SolveResult solve(const Formula& form) override;
 
 private:
-    /**
-     * A rekurzív mag: ez végzi a tényleges keresést.
-     * A formulát érték szerint adjuk át, hogy minden szinten saját másolata legyen
-     * (egyszerűbb visszalépni/backtrackelni).
-     */
+//fő része az algoritmusnak
     SolveResult dpll(Formula formula);
 
     /**
-     * Egység-propagáció (Unit Propagation): 
+     * Egység-propagáció: 
      * Megkeresi az 1 hosszú klózokat és kényszeríti az értéküket.
      * Igazzal tér vissza, ha sikeres, és hamissal, ha ellentmondást (üres klózt) talált.
      */
