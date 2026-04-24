@@ -37,5 +37,18 @@ int main()
         else
             std::cout << "UNSAT\n";
     }
+//stackDPLL
+     for (const auto& filename : files) {
+        std::cout << "Testing file with stackDPLL: " << filename << " ... ";
+
+        Formula f = parseCNF(filename); // CNF fájl beolvasása
+        stackDPLLSolver solver;                // Solver objektum
+        SolveResult result = solver.solve(f);
+
+        if (result == SolveResult::SAT)
+            std::cout << "SAT\n";
+        else
+            std::cout << "UNSAT\n";
+    }
     return 0;
 }

@@ -3,7 +3,7 @@
 #include "../Solver.h" 
 #include "../../formula/DPLLFormula.h"
 
-class DPLLSolver : public Solver
+class stackDPLLSolver : public Solver
 {
 public:
     //belépési pont 
