@@ -1,4 +1,4 @@
-#include "DPLLSolver.h"
+#include "stackDPLLSolver.h"
 #include <cmath>
 
 //belépési pont
