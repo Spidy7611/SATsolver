@@ -5,12 +5,7 @@
 // 1. Belépési pont
 SolveResult stackDPLLSolver::solve(const Formula& form) {
     DPLLFormula f(form.numVars, form.clauses);
-    return dpllIterative(f);
-}
-
-// 2. Az iteratív DPLL
-SolveResult stackDPLLSolver::dpllIterative(DPLLFormula& f) {
-    // 0. LÉPÉS: Kezdeti Unit klózok beállítása
+     // 0. LÉPÉS: Kezdeti Unit klózok beállítása
     for (const auto& clause : f.clauses) {
         if (clause.size() == 1) {
             if (!assign(f, clause[0])) {
@@ -18,7 +13,11 @@ SolveResult stackDPLLSolver::dpllIterative(DPLLFormula& f) {
             }
         }
     }
+    return dpllIterative(f);
+}
 
+// 2. Az iteratív DPLL
+SolveResult stackDPLLSolver::dpllIterative(DPLLFormula& f) {
     while (true) {
         // 1. LÉPÉS: BCP (Propagáció)
         if (!propagate(f)) {
@@ -141,5 +140,5 @@ bool stackDPLLSolver::assign(DPLLFormula& f, int lit) {
     // Ha idáig eljut, akkor a változó eddig 0 (ismeretlen) volt.
     f.assignments[var] = val;
     f.trail.push_back(lit);
-    return true;
+    return true;  
 }
