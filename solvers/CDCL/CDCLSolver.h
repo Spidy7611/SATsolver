@@ -29,5 +29,5 @@ private:
     void backjump(CDCLFormula& f, int level);
 
     // Új változó hozzárendelése (szint és indoklás mentésével)
-    void assign(CDCLFormula& f, int lit, int level, int reasonID);
+    bool assign(CDCLFormula& f, int lit, int reasonID);
 };

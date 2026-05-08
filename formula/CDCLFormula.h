@@ -1,20 +1,14 @@
 #pragma once
 #include <vector>
 #include <algorithm>
+#include "WatchedFormula.h"
 
-struct Watcher {
-    int clauseID;
-    int blockingLiteral;
-};
-
-class CDCLFormula {
+class CDCLFormula : public WatchedFormula {
 public:
     int numVars;
     // Az eredeti és a tanult klózok egy helyen vagy külön is lehetnek. 
     // Itt most egyben kezeljük őket a sebesség miatt.
     std::vector<std::vector<int>> clauses;
-    
-    std::vector<std::vector<Watcher>> watches;
     std::vector<int> assignments; // 0, 1, -1
     std::vector<int> trail;
     
@@ -37,7 +31,8 @@ public:
 
     int qhead = 0;
 
-    CDCLFormula(int n, const std::vector<std::vector<int>>& c) : numVars(n), clauses(c) {
+    CDCLFormula(int n, const std::vector<std::vector<int>>& c)
+        : WatchedFormula(n), numVars(n), clauses(c) {
         assignments.assign(numVars + 1, 0);
         decisionLevels.assign(numVars + 1, -1);
         reasons.assign(numVars + 1, -1);
@@ -45,23 +40,7 @@ public:
         
         trail.reserve(numVars);
         trailLim.reserve(numVars);
-        watches.resize(2 * numVars + 2);
-        
-        // Kezdeti 2WL (mint a DPLL-nél)
-        for (int i = 0; i < (int)clauses.size(); ++i) {
-            if (clauses[i].size() >= 2) {
-                addWatch(clauses[i][0], i, clauses[i][1]);
-                addWatch(clauses[i][1], i, clauses[i][0]);
-            }
-        }
-    }
-
-    inline int litToIdx(int lit) const {
-        return (lit > 0) ? (lit << 1) : ((-lit) << 1 | 1);
-    }
-
-    void addWatch(int lit, int clauseID, int blockLit) {
-        watches[litToIdx(lit)].push_back({clauseID, blockLit});
+        initTwoWatchedLiterals(clauses);
     }
 
     // Új klóz hozzáadása futás közben (tanuláskor)
@@ -74,4 +53,28 @@ public:
             addWatch(newClause[1], newID, newClause[0]);
         }
     }
+
+// --- SEGÉDFÜGGVÉNYEK A SOLVERHEZ ---
+
+    // Jelenlegi döntési szint lekérdezése
+    inline int currentLevel() const {
+        return trailLim.size();
+    }
+
+    // Új döntési szint kezdése
+    inline void newDecisionLevel() {
+        trailLim.push_back(trail.size());
+    }
+
+    // Változó értékének lekérdezése (0, 1, vagy -1)
+    inline int value(int lit) const {
+        int val = assignments[std::abs(lit)];
+        return (lit > 0) ? val : -val; 
+    }
+
+    // Kész vagyunk-e?
+    inline bool allAssigned() const {
+        return trail.size() == numVars;
+    }
+
 };

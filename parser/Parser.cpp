@@ -46,7 +46,7 @@ Formula parseCNF(const std::string& filename) {
     }
 
     formula.numVars = maxVar;
-
+/*
     // Debug print
     std::cout << "Parsed " << formula.numVars << " vars, "
               << formula.clauses.size() << " clauses:\n";
@@ -55,6 +55,6 @@ Formula parseCNF(const std::string& filename) {
         for (Literal lit : formula.clauses[i]) std::cout << lit << " ";
         std::cout << "\n";
     }
-
+*/
     return formula;
 }

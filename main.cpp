@@ -10,7 +10,8 @@ int main()
         "cnf_examples/sat_example.cnf",
         "cnf_examples/unsat_example.cnf"
     };
-//BF
+/*
+    //BF
     for (const auto& filename : files) {
         std::cout << "Testing file with BF: " << filename << " ... ";
 
@@ -43,6 +44,21 @@ int main()
 
         Formula f = parseCNF(filename); // CNF fájl beolvasása
         stackDPLLSolver solver;                // Solver objektum
+        SolveResult result = solver.solve(f);
+
+        if (result == SolveResult::SAT)
+            std::cout << "SAT\n";
+        else
+            std::cout << "UNSAT\n";
+    }
+    
+*/
+//CDCL
+     for (const auto& filename : files) {
+        std::cout << "Testing file with CDCL: " << filename << " ... ";
+
+        Formula f = parseCNF(filename); // CNF fájl beolvasása
+        CDCLSolver solver;                // Solver objektum
         SolveResult result = solver.solve(f);
 
         if (result == SolveResult::SAT)
