@@ -4,3 +4,6 @@
 .vscode/
 build/
 bin/
+*.cnf
+*.xz
+*.gz

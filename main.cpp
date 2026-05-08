@@ -6,13 +6,16 @@ int main()
 {
     // Tesztelendő CNF fájlok
     std::string files[] = {
-        "cnf_examples/example.cnf",
-        "cnf_examples/sat_example.cnf",
-        "cnf_examples/unsat_example.cnf"
+      // "cnf_examples/aloul-chnl11-13.cnf", 
+"cnf_examples/anbul-dated-5-15-u.cnf", 
+"cnf_examples/anbul-part-10-13-s.cnf", 
+"cnf_examples/anbul-part-10-15-s.cnf", 
+"cnf_examples/babic-dspam-vc1080.cnf", 
+"cnf_examples/babic-dspam-vc949.cnf", 
     };
-/*
+
     //BF
-    for (const auto& filename : files) {
+    /*for (const auto& filename : files) {
         std::cout << "Testing file with BF: " << filename << " ... ";
 
         Formula f = parseCNF(filename); // CNF fájl beolvasása
@@ -50,9 +53,9 @@ int main()
             std::cout << "SAT\n";
         else
             std::cout << "UNSAT\n";
-    }
+    }*/
     
-*/
+
 //CDCL
      for (const auto& filename : files) {
         std::cout << "Testing file with CDCL: " << filename << " ... ";
