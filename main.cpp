@@ -6,7 +6,9 @@ int main()
 {
     // Tesztelendő CNF fájlok
     std::string files[] = {
-        "cnf_examples/test/sat/bmc-1.cnf",
+        "cnf_examples/sat_example.cnf",
+        "cnf_examples/unsat_example.cnf",
+       "cnf_examples/test/sat/bmc-1.cnf",
         "cnf_examples/test/sat/bmc-2.cnf",
         "cnf_examples/test/sat/bmc-3.cnf",
         "cnf_examples/test/sat/bmc-4.cnf",
@@ -74,8 +76,10 @@ int main()
 
         if (result == SolveResult::SAT)
             std::cout << "SAT\n";
-        else
+        else if(result == SolveResult::UNSAT)
             std::cout << "UNSAT\n";
+        else
+            std::cout << "UNKNOWN\n";
     }
     return 0;
 }
