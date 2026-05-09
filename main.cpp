@@ -6,12 +6,20 @@ int main()
 {
     // Tesztelendő CNF fájlok
     std::string files[] = {
-      // "cnf_examples/aloul-chnl11-13.cnf", 
-"cnf_examples/anbul-dated-5-15-u.cnf", 
-"cnf_examples/anbul-part-10-13-s.cnf", 
-"cnf_examples/anbul-part-10-15-s.cnf", 
-"cnf_examples/babic-dspam-vc1080.cnf", 
-"cnf_examples/babic-dspam-vc949.cnf", 
+        "cnf_examples/test/sat/bmc-1.cnf",
+        "cnf_examples/test/sat/bmc-2.cnf",
+        "cnf_examples/test/sat/bmc-3.cnf",
+        "cnf_examples/test/sat/bmc-4.cnf",
+        "cnf_examples/test/sat/bmc-5.cnf",
+        "cnf_examples/test/sat/bmc-6.cnf",
+        "cnf_examples/test/sat/bmc-7.cnf",
+        "cnf_examples/test/sat/bmc-8.cnf",
+        "cnf_examples/test/sat/bmc-9.cnf",
+        "cnf_examples/test/sat/bmc-10.cnf",
+        "cnf_examples/test/unsat/unsat1.cnf",
+        "cnf_examples/test/unsat/unsat2.cnf",
+        "cnf_examples/test/unsat/unsat3.cnf",
+        "cnf_examples/test/unsat/unsat.cnf",
     };
 
     //BF
