@@ -1,6 +1,7 @@
 #include "CDCLSolver.h"
 #include <cmath>
 #include <algorithm>
+#include <iostream>
 
 // --- Alapfüggvények ---
 
@@ -244,6 +245,7 @@ SolveResult CDCLSolver::solve(const Formula& form) {
         } else {
             // Nincs konfliktus. Készen vagyunk?
             if (f.allAssigned()) {
+                //verify_and_print_every_clause(f.clauses, f.assignments);
                 return SolveResult::SAT;
             }
             
@@ -252,5 +254,60 @@ SolveResult CDCLSolver::solve(const Formula& form) {
             f.newDecisionLevel();
             assign(f, nextVar, -1);
         }
+    }
+    
+}
+void CDCLSolver::verify_and_print_every_clause(const std::vector<std::vector<int>>& clauses, const std::vector<int>& assignment) {
+    std::cout << "\n--- TELJES FORMULA ELLENORZESE ---" << std::endl;
+    int broken_count = 0;
+
+    for (size_t i = 0; i < clauses.size(); ++i) {
+        bool clause_true = false;
+        std::string debug_line = "";
+        
+        debug_line += "Kloz #" + std::to_string(i) + ": [ ";
+        
+        for (int lit : clauses[i]) {
+            int var = std::abs(lit);
+            
+            // Hibakezeles: ha a valtozo indexe nagyobb, mint az assignment tomb
+            int val = 0;
+            if (var < (int)assignment.size()) {
+                val = assignment[var]; 
+            }
+
+            // Meghatarozzuk a literal statuszat az ertekadas alapjan
+            // val == 1 (True), val == -1 (False), val == 0 (Unassigned)
+            std::string status;
+            if ((lit > 0 && val == 1) || (lit < 0 && val == -1)) {
+                status = "T"; // True
+                clause_true = true;
+            } else if ((lit > 0 && val == -1) || (lit < 0 && val == 1)) {
+                status = "F"; // False
+            } else {
+                status = "U"; // Unassigned
+            }
+
+            debug_line += std::to_string(lit) + "(" + status + ") ";
+        }
+        
+        debug_line += "]";
+
+        if (clause_true) {
+            std::cout << debug_line << " -> OK" << std::endl;
+        } else {
+            std::cout << debug_line << " -> !!! HIBA: EZ A KLOZ HAMIS !!!" << std::endl;
+            broken_count++;
+        }
+    }
+
+    std::cout << "\n--- OSSZESITES ---" << std::endl;
+    std::cout << "Osszes kloz: " << clauses.size() << std::endl;
+    std::cout << "Hibas klozok szama: " << broken_count << std::endl;
+    
+    if (broken_count > 0) {
+        std::cout << "EREDMENY: A solver hibasan adott SAT-ot!" << std::endl;
+    } else {
+        std::cout << "EREDMENY: Minden kloz tenyleg IGAZ." << std::endl;
     }
 }

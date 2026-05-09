@@ -30,4 +30,6 @@ private:
 
     // Új változó hozzárendelése (szint és indoklás mentésével)
     bool assign(CDCLFormula& f, int lit, int reasonID);
+
+    void verify_and_print_every_clause(const std::vector<std::vector<int>>& clauses, const std::vector<int>& assignment);
 };

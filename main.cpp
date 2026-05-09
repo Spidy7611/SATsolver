@@ -6,6 +6,8 @@ int main()
 {
     // Tesztelendő CNF fájlok
     std::string files[] = {
+        "cnf_examples/php10.cnf",
+        /*"cnf_examples/example.cnf",
         "cnf_examples/sat_example.cnf",
         "cnf_examples/unsat_example.cnf",
        "cnf_examples/test/sat/bmc-1.cnf",
@@ -21,7 +23,8 @@ int main()
         "cnf_examples/test/unsat/unsat1.cnf",
         "cnf_examples/test/unsat/unsat2.cnf",
         "cnf_examples/test/unsat/unsat3.cnf",
-        "cnf_examples/test/unsat/unsat.cnf",
+        "cnf_examples/test/unsat/unsat.cnf",*/
+
     };
 
     //BF
@@ -73,7 +76,7 @@ int main()
         Formula f = parseCNF(filename); // CNF fájl beolvasása
         CDCLSolver solver;                // Solver objektum
         SolveResult result = solver.solve(f);
-
+        
         if (result == SolveResult::SAT)
             std::cout << "SAT\n";
         else if(result == SolveResult::UNSAT)
