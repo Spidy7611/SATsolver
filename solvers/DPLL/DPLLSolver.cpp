@@ -5,7 +5,7 @@
 SolveResult DPLLSolver::solve(const Formula& form)
 {
     // Meghívjuk a rekurzív magot. 
-    // Mivel a dpll paramétere nem referencia (Formula f), 
+    
     // itt automatikusan készül egy első másolat az eredeti adatról.
     return dpll(form);
 }

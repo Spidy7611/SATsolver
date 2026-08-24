@@ -12,7 +12,7 @@ public:
     std::vector<int> assignments; // 0, 1, -1
     std::vector<int> trail;
     
-    // --- ÚJ CDCL SPECIFIKUS MEZŐK ---
+   
 
     // 1. Döntési szintek: Melyik szinten lett beállítva a változó?
     // (Pl. level[5] = 2 azt jelenti, hogy az x5 változó a 2. döntésnél kapott értéket)
